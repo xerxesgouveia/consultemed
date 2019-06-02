@@ -1,11 +1,20 @@
 package aula1;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 public class Atendente extends Pessoa implements CRUDAtendente {
 
-	private List<Atendente> atendentes = new ArrayList<Atendente>();
+
+	private List<Atendente> atendentes;
+	
+	public Atendente() {
+		// TODO Auto-generated constructor stub
+		if(atendentes == null) {
+			atendentes = new ArrayList<Atendente>();
+		}
+	}
 	
 	@Override
 	public void fazerAnivesario() {

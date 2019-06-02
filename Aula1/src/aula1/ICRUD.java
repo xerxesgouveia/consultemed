@@ -1,5 +1,6 @@
 package aula1;
 
+import java.util.Collection;
 import java.util.List;
 
 public interface ICRUD <T> {
