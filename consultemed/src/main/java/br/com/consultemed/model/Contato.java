@@ -25,7 +25,7 @@ public class Contato {
 	private String email;
 	@Column(name="telefone_contato")
 	private String telefone;
-	@ManyToOne()
+	@ManyToOne(cascade=CascadeType.PERSIST)
 	@JoinColumn(name="id_paciente")
 	private Paciente paciente;
 	
