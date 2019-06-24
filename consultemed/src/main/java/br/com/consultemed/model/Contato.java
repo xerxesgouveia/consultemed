@@ -12,6 +12,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.ForeignKey;
+
 @Table(name = "contatos")
 @Entity
 public class Contato {
@@ -25,8 +27,8 @@ public class Contato {
 	private String email;
 	@Column(name="telefone_contato")
 	private String telefone;
-	@ManyToOne(cascade=CascadeType.PERSIST)
-	@JoinColumn(name="id_paciente")
+	@ManyToOne()
+	@JoinColumn(name="id_paciente", referencedColumnName = "id", nullable=false)
 	private Paciente paciente;
 	
 	public Paciente getPaciente() {

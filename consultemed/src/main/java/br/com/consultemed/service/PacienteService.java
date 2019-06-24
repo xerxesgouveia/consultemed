@@ -40,8 +40,7 @@ public class PacienteService implements IPaciente {
 
 	@Override
 	public Paciente buscaPacienteNome(String nome) {
-		// TODO Auto-generated method stub
-		return null;
+		return this.dao.buscarPorNome(nome);
 	}
 
 	@Override
