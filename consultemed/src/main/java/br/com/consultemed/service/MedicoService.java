@@ -44,7 +44,8 @@ public class MedicoService implements IMedico {
 	@Override
 	public Medico buscaMedicoNome(String nome) {
 		// TODO Auto-generated method stub
-		return null;
+		
+		return this.dao.buscarPorNome(nome);
 	}
 
 	@Override

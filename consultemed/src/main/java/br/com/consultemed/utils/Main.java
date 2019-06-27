@@ -5,13 +5,20 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
+import br.com.consultemed.model.Agendamento;
+import br.com.consultemed.model.Consulta;
 import br.com.consultemed.model.Contato;
 import br.com.consultemed.model.Horario;
 import br.com.consultemed.model.Medico;
 import br.com.consultemed.model.Paciente;
+import br.com.consultemed.service.AgendamentoService;
+import br.com.consultemed.service.ConsultaService;
 import br.com.consultemed.service.ContatoService;
 import br.com.consultemed.service.HorarioService;
 import br.com.consultemed.service.MedicoService;
@@ -36,6 +43,11 @@ public class Main {
 			System.out.println("3 - Cadastrar Contato");
 			System.out.println("4 - Listar Contatos");
 			System.out.println("5 - Cadastrar Médico");
+			System.out.println("6 - Agendar uma consulta");
+			System.out.println("7 - Listar agendamentos");
+			System.out.println("8 - Cadastrar consulta");
+			System.out.println("9 - Listar consultas");
+			System.out.println("10 - Listar consultas por data");
 			
 			String opcao = 	buf.readLine();
 			switch (opcao) {
@@ -107,6 +119,62 @@ public class Main {
 				}
 				medico.setHorarios(horarios);
 				medicoService.salvar(medico);
+				break;
+			case "6":
+				PacienteService pacienteService4 = new PacienteService();
+				MedicoService medicoService2 = new MedicoService();
+				AgendamentoService agendamentoService = new AgendamentoService();
+				Agendamento agendamento = new Agendamento();
+				
+				System.out.println("Digite o nome do paciente");
+				agendamento.setPaciente(pacienteService4.buscaPacienteNome(buf.readLine()));
+				System.out.println("Digite o nome do médico");
+				agendamento.setMedico(medicoService2.buscaMedicoNome(buf.readLine()));
+				
+				LocalDateTime agora = LocalDateTime.now();
+
+				DateTimeFormatter formatterData = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+				String dataFormatada = formatterData.format(agora);
+				agendamento.setDataHora(new SimpleDateFormat("dd/MM/yyyy").parse(dataFormatada));
+				agendamentoService.salvar(agendamento);
+				
+				break;
+			case "7":
+				AgendamentoService agendamentoService2 = new AgendamentoService();
+				agendamentoService2.listar();
+				break;
+			case "8":
+				PacienteService pacienteService5 = new PacienteService();
+				MedicoService medicoService3 = new MedicoService();
+				ConsultaService consultaService = new ConsultaService();
+				Consulta consulta = new Consulta();
+				
+				System.out.println("Digite o nome do paciente");
+				consulta.setPaciente(pacienteService5.buscaPacienteNome(buf.readLine()));
+				System.out.println("Digite o nome do médico");
+				consulta.setMedico(medicoService3.buscaMedicoNome(buf.readLine()));
+				
+				LocalDateTime agora1 = LocalDateTime.now();
+
+				DateTimeFormatter formatterData1 = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+				String dataFormatada1 = formatterData1.format(agora1);
+				consulta.setDataHora(new SimpleDateFormat("dd/MM/yyyy").parse(dataFormatada1));
+				consultaService.salvar(consulta);
+				
+				break;
+			case "9":
+				ConsultaService consultaService2 = new ConsultaService();
+				consultaService2.listar();
+				break;
+			case "10":
+				ConsultaService consultaService3 = new ConsultaService();
+				System.out.println("Digite a data inicial");
+				String data_inicio = buf.readLine();
+				Date data_inicial = new SimpleDateFormat("dd/MM/yyyy").parse(data_inicio);
+				System.out.println("Digite a data final");
+				String data_fim = buf.readLine();
+				Date data_final = new SimpleDateFormat("dd/MM/yyyy").parse(data_fim);
+				consultaService3.buscaPorData(data_inicial, data_final);
 				break;
 			default:
 				System.out.println("Opção inválida!");

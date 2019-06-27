@@ -10,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Table(name = "medicos")
@@ -28,6 +29,10 @@ public class Medico {
 	@ManyToMany
 	@JoinTable(name="medicoshorarios", joinColumns= {@JoinColumn(name="id_medico", referencedColumnName="id")}, inverseJoinColumns= {@JoinColumn(name="id_horario", referencedColumnName="id")})
 	private List<Horario> horarios;
+	@OneToMany(mappedBy="medico")
+	private List<Agendamento> agendamentos;
+	@OneToMany(mappedBy="medico")
+	private List<Consulta> consultas;
 	
 	public Long getId() {
 		return id;
@@ -59,9 +64,20 @@ public class Medico {
 	public void setHorarios(List<Horario> horarios) {
 		this.horarios = horarios;
 	}
+	public List<Agendamento> getAgendamentos() {
+		return agendamentos;
+	}
+	public void setAgendamentos(List<Agendamento> agendamentos) {
+		this.agendamentos = agendamentos;
+	}
+	public List<Consulta> getConsultas() {
+		return consultas;
+	}
+	public void setConsultas(List<Consulta> consultas) {
+		this.consultas = consultas;
+	}
 	
 	
 	
-	
-	
+
 }

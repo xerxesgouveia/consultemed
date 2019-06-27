@@ -38,6 +38,10 @@ public class Paciente {
 	private String email;
 	@OneToMany(mappedBy="paciente")
 	private List<Contato> contatos;
+	@OneToMany(mappedBy="paciente")
+	private List<Agendamento> agendamentos;
+	@OneToMany(mappedBy="paciente")
+	private List<Consulta> consultas;
 	
 	
 	public Long getId() {
@@ -79,7 +83,18 @@ public class Paciente {
 	public void setCpf(String cpf) {
 		this.cpf = cpf;
 	}
-	
+	public List<Agendamento> getAgendamentos() {
+		return agendamentos;
+	}
+	public void setAgendamentos(List<Agendamento> agendamentos) {
+		this.agendamentos = agendamentos;
+	}
+	public List<Consulta> getConsultas() {
+		return consultas;
+	}
+	public void setConsultas(List<Consulta> consultas) {
+		this.consultas = consultas;
+	}
 	
 	
 	
