@@ -56,5 +56,7 @@ public class ConsultaService implements IConsulta {
 		// TODO Auto-generated method stub
 		return this.dao.buscarPorData(data_inicio, data_fim);
 	}
+	
+	
 
 }

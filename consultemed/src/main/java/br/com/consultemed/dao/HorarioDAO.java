@@ -9,8 +9,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Query;
 
+import br.com.consultemed.model.Consulta;
 import br.com.consultemed.model.Horario;
-import br.com.consultemed.model.Medico;
 import br.com.consultemed.utils.JPAUtils;
 
 /**
@@ -65,6 +65,7 @@ public class HorarioDAO {
 		this.factory.close();
 		return horarios;
 		
-	} 
+	}
+	
 
 }

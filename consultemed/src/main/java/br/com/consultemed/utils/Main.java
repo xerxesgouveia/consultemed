@@ -130,14 +130,16 @@ public class Main {
 				agendamento.setPaciente(pacienteService4.buscaPacienteNome(buf.readLine()));
 				System.out.println("Digite o nome do médico");
 				agendamento.setMedico(medicoService2.buscaMedicoNome(buf.readLine()));
-				
-				LocalDateTime agora = LocalDateTime.now();
+				System.out.println("Digite a data do agendamento no formato dd/mm/aaaa");
+				String dataAgendamento = buf.readLine();
+				agendamento.setDataHora(new SimpleDateFormat("dd/MM/yyyy").parse(dataAgendamento));
+				int validaAgendamento = agendamentoService.validaAgendamento(agendamento);
+				if(validaAgendamento==1) {
+					System.out.println("Não é possível agendar para uma data retroativa!");
+				}else {
 
-				DateTimeFormatter formatterData = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-				String dataFormatada = formatterData.format(agora);
-				agendamento.setDataHora(new SimpleDateFormat("dd/MM/yyyy").parse(dataFormatada));
-				agendamentoService.salvar(agendamento);
-				
+					agendamentoService.salvar(agendamento);
+				}
 				break;
 			case "7":
 				AgendamentoService agendamentoService2 = new AgendamentoService();
