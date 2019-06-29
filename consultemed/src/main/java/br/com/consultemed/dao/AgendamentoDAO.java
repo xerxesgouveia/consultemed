@@ -37,8 +37,9 @@ public class AgendamentoDAO {
 	}
 	
 	public Agendamento buscarPorId(Long id) {
-		this.factory.getTransaction().begin();
+		
 		Agendamento agendamentoRemover = this.factory.find(Agendamento.class, id);
+		
 		return agendamentoRemover;
 	}
 	

@@ -38,7 +38,7 @@ public class ConsultaDAO {
 	}
 	
 	public Consulta buscarPorId(Long id) {
-		this.factory.getTransaction().begin();
+		
 		Consulta consultaRemover = this.factory.find(Consulta.class, id);
 		return consultaRemover;
 	}

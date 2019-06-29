@@ -48,6 +48,8 @@ public class Main {
 			System.out.println("8 - Cadastrar consulta");
 			System.out.println("9 - Listar consultas");
 			System.out.println("10 - Listar consultas por data");
+			System.out.println("11 - Remover agendamento");
+			System.out.println("12 - Cancelar consulta");
 			
 			String opcao = 	buf.readLine();
 			switch (opcao) {
@@ -177,6 +179,41 @@ public class Main {
 				String data_fim = buf.readLine();
 				Date data_final = new SimpleDateFormat("dd/MM/yyyy").parse(data_fim);
 				consultaService3.buscaPorData(data_inicial, data_final);
+				break;
+			case "11":
+				AgendamentoService agendamentoService3 = new AgendamentoService();
+				System.out.println("Digite o código do agendamento");
+				agendamentoService3.remover(Long.parseLong(buf.readLine()));
+				System.out.println("Agendamento removido!");
+				break;
+			case "12":
+				ConsultaService consultaService4 = new ConsultaService();
+				AgendamentoService agendamentoService4 = new AgendamentoService();
+				PacienteService pacienteService6 = new PacienteService();
+				MedicoService medicoService4 = new MedicoService();
+				System.out.println("Digite o código da consulta");
+				consultaService4.remover(Long.parseLong(buf.readLine()));
+				System.out.println("Consulta removida!");
+				System.out.println("Deseja reagendar? 1 - Sim 2 - Não");
+				String opcaoReagendar = buf.readLine();
+				if(opcaoReagendar.equals("1")) {
+					Agendamento reagendamento = new Agendamento();
+					
+					System.out.println("Digite o nome do paciente");
+					reagendamento.setPaciente(pacienteService6.buscaPacienteNome(buf.readLine()));
+					System.out.println("Digite o nome do médico");
+					reagendamento.setMedico(medicoService4.buscaMedicoNome(buf.readLine()));
+					System.out.println("Digite a data do agendamento no formato dd/mm/aaaa");
+					String dataReagendamento = buf.readLine();
+					reagendamento.setDataHora(new SimpleDateFormat("dd/MM/yyyy").parse(dataReagendamento));
+					int validaReagendamento = agendamentoService4.validaAgendamento(reagendamento);
+					if(validaReagendamento==1) {
+						System.out.println("Não é possível agendar para uma data retroativa!");
+					}else {
+
+						agendamentoService4.salvar(reagendamento);
+					}	
+				}
 				break;
 			default:
 				System.out.println("Opção inválida!");
